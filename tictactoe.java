@@ -41,13 +41,15 @@ public class tictactoe {
 		// keep playing until someone wins
 		while(true) {
 			System.out.println("Enter your placement (1-9):");
-			int playerpos = scan.nextInt(); 
+			int playerpos = scan.nextInt();
+			// check if the position is occupied and repeatedly prompt the user for a new input
 			while(player1Board.contains(playerpos) || player2Board.contains(playerpos)) {
 				System.out.println("Position taken! Enter a correct Position"); 
 				playerpos = scan.nextInt();
 			}
 			placepiece(gameboard, playerpos, "player");
 			
+			// print the game after the first input during multiplayer
 			if (isMultiplayer) {
 				printgameboard(gameboard);
 			}
@@ -64,6 +66,7 @@ public class tictactoe {
 			Random rand = new Random(); 
 			int player2pos = rand.nextInt(9) + 1; 
 
+			// if multiplayer, repeatedly prompt the second player to input a correct position
 			if (isMultiplayer) {
 				System.out.println("Player 2 please enter your placement (1-9):");
 				player2pos = scan.nextInt(); 
@@ -71,7 +74,7 @@ public class tictactoe {
 					System.out.println("Position taken! Enter a correct Position"); 
 					player2pos = scan.nextInt();
 				}
-			} else {
+			} else { // if single player, computer repeatedly choose a position until valid
 				while(player1Board.contains(player2pos) || player2Board.contains(player2pos)) {
 					player2pos = rand.nextInt(9) + 1; 
 				}
@@ -85,9 +88,7 @@ public class tictactoe {
 				System.out.println(result); 
 				break; 
 			}
-			
 		}
-		
 	}
 	
 	public static void printgameboard(char [] [] gameboard) {
